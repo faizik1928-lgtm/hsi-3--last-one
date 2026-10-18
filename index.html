@@ -1,0 +1,3280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#01030F">
+<title>HSI Solutions — Simple Systems for Stronger Care</title>
+<meta name="description" content="HSI Solutions provides healthcare operations support for rural and critical access hospitals across the Upper Midwest since 1963.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Preload deployment background images so they appear immediately -->
+<link rel="preload" as="image" href="./scene1.jpg">
+<link rel="preload" as="image" href="./scene2.jpg">
+<link rel="preload" as="image" href="./scene3.jpg">
+
+<style>
+:root {
+  --ink: #01030F;
+  --navy: #081a35;
+  --hsi-blue: #2356a6;
+  --blue: #0071FF;
+  --hover: #8FC2FF;
+  --focus: #4DA3FF;
+  --sand: #E6DFD6;
+  --sand-soft: rgba(230,223,214,0.14);
+  --white: #FFFFFF;
+  --hairline: rgba(255,255,255,0.84);
+  --survey-line: rgba(255,255,255,0.78);
+  --panel-bg: rgba(4,9,26,0.96);
+  --glass-card: rgba(255,255,255,0.07);
+  --glass-border: rgba(255,255,255,0.18);
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-sans: "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "IBM Plex Mono", Menlo, Consolas, monospace;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: var(--ink);
+  color: var(--white);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Document scroll track: 800vh for continuous narrative with zero dead zones */
+body {
+  min-height: 800vh;
+}
+
+/* Fixed viewport stage */
+#viewport-stage {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--ink);
+  pointer-events: auto;
+}
+
+/* Background visual layers with smooth crossfade */
+.media-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.scene-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  opacity: 0;
+  transform: scale(1.03);
+  transition: opacity 0.85s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s ease-out;
+  will-change: opacity, transform;
+}
+
+.scene-media.active {
+  opacity: 1;
+}
+
+/* Atmospheric overlays */
+.atmosphere-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 70% 35%, rgba(0,113,255,0.12) 0%, rgba(1,3,15,0.68) 55%, #01030F 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.top-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 150px;
+  background: linear-gradient(to bottom, rgba(1,3,15,0.92) 0%, rgba(1,3,15,0) 100%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.bottom-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 160px;
+  background: linear-gradient(to top, rgba(1,3,15,0.94) 0%, rgba(1,3,15,0) 100%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Focus styles */
+button:focus-visible, a:focus-visible, [tabindex="0"]:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* ========================================================
+   AARON IKER BUTTON HOVER ANIMATION SYSTEM
+   (Dribbble Shot 20982047: Rolling Arrow & Ambient Glow)
+   ======================================================== */
+.aaron-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 6px 6px 20px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(0, 113, 255, 0.92) 0%, rgba(35, 86, 166, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 113, 255, 0.35), inset 0 1px 1px rgba(255,255,255,0.3);
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.aaron-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-25deg);
+  transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+
+.aaron-btn:hover::before {
+  transform: translateX(340%) skewX(-25deg);
+}
+
+.aaron-btn:hover {
+  background: linear-gradient(135deg, #1f85ff 0%, #0071FF 100%);
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 28px rgba(0, 113, 255, 0.65), 0 0 16px rgba(0, 113, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.aaron-btn:active {
+  transform: scale(0.97) translateY(0);
+  box-shadow: 0 2px 10px rgba(0, 113, 255, 0.4);
+}
+
+.aaron-btn .btn-arrow-capsule {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.aaron-btn:hover .btn-arrow-capsule {
+  background: #FFFFFF;
+  transform: scale(1.05);
+}
+
+.aaron-btn .btn-arrow-icon {
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.aaron-btn .btn-arrow-icon svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: #FFFFFF;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.25s ease;
+}
+
+.aaron-btn:hover .btn-arrow-icon svg {
+  stroke: #0071FF;
+  animation: aaronRoll 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes aaronRoll {
+  0% { transform: translate(0, 0); opacity: 1; }
+  45% { transform: translate(14px, -14px); opacity: 0; }
+  46% { transform: translate(-14px, 14px); opacity: 0; }
+  100% { transform: translate(0, 0); opacity: 1; }
+}
+
+.aaron-btn-glass {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.aaron-btn-glass:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: #FFFFFF;
+  box-shadow: 0 8px 30px rgba(0, 113, 255, 0.35);
+}
+
+/* ========================================================
+   PERSISTENT HEADER BAR WITH GLOWING POP-UP MENU BUTTONS
+   ======================================================== */
+.header-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 76px;
+  padding: 0 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 60;
+  pointer-events: auto;
+}
+
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--white);
+  cursor: pointer;
+  z-index: 61;
+}
+
+.brand-icon {
+  width: 28px;
+  height: 34px;
+  display: block;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-wordmark {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 20px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.brand-sub {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.08em;
+  color: var(--sand);
+  opacity: 0.85;
+}
+
+/* Pop-Up Lighting Effect for Navbar Buttons */
+.nav-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(1, 3, 15, 0.7);
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+}
+
+.nav-link {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 14px;
+  border-radius: 999px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: radial-gradient(circle at 50% 0%, rgba(0, 113, 255, 0.6) 0%, rgba(0, 113, 255, 0) 75%);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+
+/* Pop-up & Lighting Effect on Hover / Active */
+.nav-link:hover, .nav-link.active {
+  color: #FFFFFF;
+  background: rgba(8, 26, 53, 0.85);
+  border: 1px solid rgba(77, 163, 255, 0.65);
+  box-shadow: 0 4px 20px rgba(0, 113, 255, 0.55), 0 0 12px rgba(77, 163, 255, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  transform: translateY(-2.5px) scale(1.04);
+  text-shadow: 0 0 8px rgba(143, 194, 255, 0.9);
+}
+
+.nav-link:hover::before, .nav-link.active::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.nav-link:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* Header Right Actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 61;
+}
+
+.utility-link {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--sand);
+  text-decoration: none;
+  opacity: 0.85;
+  transition: all 0.2s ease;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+}
+
+.utility-link:hover {
+  opacity: 1;
+  color: var(--white);
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-1.5px);
+}
+
+.mobile-hamburger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: var(--white);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  z-index: 65;
+}
+
+/* ========================================================
+   LOGICAL DESKTOP STAGE (1280 x 720 reference)
+   ======================================================== */
+#logical-stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1280px;
+  height: 720px;
+  transform-origin: top left;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Base Stage Scene Rule: Strictly display none & pointer-events none when inactive! */
+.stage-scene {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  display: none;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  z-index: 5;
+}
+
+/* ========================================================
+   STAGE 1: Hero & Clinical HUD (p: 0.00 - 0.18)
+   ======================================================== */
+.scene-1-container {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 20;
+}
+
+.headline-veil {
+  position: absolute;
+  left: 20px;
+  top: 135px;
+  width: 680px;
+  height: 250px;
+  background: rgba(1, 3, 15, 0.65);
+  filter: blur(34px);
+  border-radius: 16px;
+  pointer-events: none;
+  z-index: 11;
+}
+
+.hero-headline {
+  position: absolute;
+  left: 40px;
+  top: 140px;
+  z-index: 12;
+  font-family: var(--font-serif);
+  font-size: 78px;
+  line-height: 72px;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  color: var(--white);
+  max-width: 780px;
+}
+
+.hero-headline .line-mask {
+  overflow: hidden;
+  padding: 4px 0 6px 0;
+  display: block;
+}
+
+.hero-headline .line-inner {
+  display: block;
+  transform: translateY(130%);
+  transition: transform 0.66s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.hero-headline .italic-accent {
+  font-style: italic;
+  color: var(--hover);
+}
+
+.hero-btn-wrap {
+  position: absolute;
+  left: 40.5px;
+  top: 385px;
+  z-index: 12;
+  pointer-events: auto;
+}
+
+.supporting-copy {
+  position: absolute;
+  left: 42px;
+  bottom: 40px;
+  z-index: 12;
+  max-width: 520px;
+}
+
+.supporting-intro {
+  font-size: 20px;
+  line-height: 27px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.supporting-text {
+  font-size: 14.5px;
+  line-height: 21px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.85);
+}
+
+.scroll-hint {
+  position: absolute;
+  right: 49px;
+  bottom: 36px;
+  z-index: 12;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255,255,255,0.75);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.scroll-hint-icon {
+  width: 16px;
+  height: 19px;
+  animation: floatHint 2.4s ease-in-out infinite;
+}
+
+@keyframes floatHint {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+.survey-svg {
+  position: absolute;
+  inset: 0;
+  width: 1280px;
+  height: 720px;
+  pointer-events: none;
+  z-index: 11;
+}
+
+.survey-interactive-target {
+  position: absolute;
+  left: 742px;
+  top: 386px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  pointer-events: auto;
+  z-index: 14;
+}
+
+.survey-interactive-target::after {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  background: var(--blue);
+  border-radius: 50%;
+  box-shadow: 0 0 14px 4px rgba(0,113,255,0.85);
+  animation: pulseDot 2.2s infinite ease-out;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.9); opacity: 1; }
+  70% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.survey-pill {
+  position: absolute;
+  left: calc(50% + 105px);
+  top: calc(50% - 10px);
+  background: var(--blue);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 4px;
+  z-index: 14;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 0 0 12px rgba(0,113,255,0.45);
+}
+
+.survey-annotation {
+  position: absolute;
+  left: calc(50% + 225px);
+  top: calc(50% + 15px);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  line-height: 15px;
+  font-weight: 500;
+  color: var(--white);
+  z-index: 14;
+  background: rgba(1,3,15,0.7);
+  padding: 4px 8px;
+  border-left: 2px solid var(--blue);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+/* ========================================================
+   STAGE 2: Services Explorer (p: 0.18 - 0.40)
+   ======================================================== */
+.scene-2-container {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px 40px 40px;
+}
+
+.approach-veil {
+  position: absolute;
+  width: 900px;
+  height: 560px;
+  background: radial-gradient(circle, rgba(1,3,15,0.90) 0%, rgba(1,3,15,0.5) 68%, transparent 100%);
+  filter: blur(40px);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.approach-content {
+  position: relative;
+  max-width: 1120px;
+  text-align: center;
+  z-index: 16;
+}
+
+.approach-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--focus);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.approach-heading {
+  font-family: var(--font-serif);
+  font-size: 44px;
+  line-height: 1.05;
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  color: var(--white);
+  margin-bottom: 14px;
+}
+
+.approach-lead {
+  font-size: 14.5px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: rgba(255,255,255,0.85);
+  max-width: 680px;
+  margin: 0 auto 24px auto;
+}
+
+.services-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+.service-card-item {
+  background: rgba(4, 9, 26, 0.82);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 20px 18px;
+  text-align: left;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+  pointer-events: auto;
+}
+
+.service-card-item:hover {
+  background: rgba(8, 26, 53, 0.92);
+  border-color: var(--focus);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.6), 0 0 20px rgba(0,113,255,0.35);
+}
+
+.service-num {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--focus);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.service-title {
+  font-family: var(--font-serif);
+  font-size: 21px;
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.service-snippet {
+  font-size: 12px;
+  line-height: 1.45;
+  color: rgba(255,255,255,0.72);
+  margin-bottom: 14px;
+}
+
+.service-card-action {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--sand);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.service-card-item:hover .service-card-action {
+  color: var(--white);
+}
+
+/* ========================================================
+   STAGE 3: About Us & 62-Year Story (p: 0.40 - 0.62)
+   ======================================================== */
+.scene-about-container {
+  align-items: center;
+  justify-content: center;
+  padding: 85px 45px 40px 45px;
+}
+
+.about-veil {
+  position: absolute;
+  width: 960px;
+  height: 580px;
+  background: radial-gradient(circle, rgba(1,3,15,0.92) 0%, rgba(4,9,26,0.65) 75%, transparent 100%);
+  filter: blur(35px);
+  pointer-events: none;
+}
+
+.about-grid-content {
+  position: relative;
+  max-width: 1140px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 36px;
+  align-items: center;
+  z-index: 16;
+  pointer-events: auto;
+}
+
+.about-text-col {
+  text-align: left;
+}
+
+.about-tagline {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--focus);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.about-main-heading {
+  font-family: var(--font-serif);
+  font-size: 42px;
+  line-height: 1.08;
+  letter-spacing: -0.012em;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.about-paragraphs {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.88);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 12px;
+}
+
+.about-paragraphs p {
+  color: rgba(255,255,255,0.85);
+}
+
+.about-paragraphs strong {
+  color: var(--white);
+}
+
+.about-stats-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.stat-glass-card {
+  background: rgba(4, 9, 26, 0.88);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.stat-number {
+  font-family: var(--font-serif);
+  font-size: 36px;
+  line-height: 1;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--focus);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.stat-desc {
+  font-size: 12px;
+  line-height: 1.45;
+  color: rgba(255,255,255,0.7);
+}
+
+/* ========================================================
+   STAGE 4: Leadership & Board of Directors (p: 0.62 - 0.82)
+   (Buttons fixed with Pop-Up Lighting Effect & Priority Stacking)
+   ======================================================== */
+.scene-leadership-container {
+  flex-direction: column;
+  justify-content: center;
+  padding: 85px 40px 30px 40px;
+  pointer-events: auto !important;
+}
+
+.leadership-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 35;
+  pointer-events: auto;
+}
+
+.leadership-title-group h2 {
+  font-family: var(--font-serif);
+  font-size: 36px;
+  line-height: 1.1;
+  color: var(--white);
+}
+
+.leadership-title-group p {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--focus);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.leadership-tabs {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+  z-index: 40;
+  pointer-events: auto !important;
+}
+
+/* Lighting Pop-Up Effect on Leadership Tabs */
+.tab-btn {
+  position: relative;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.88);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  z-index: 45;
+  pointer-events: auto !important;
+  user-select: none;
+}
+
+.tab-btn:hover {
+  color: #FFFFFF;
+  background: rgba(0, 113, 255, 0.4);
+  border-color: rgba(77, 163, 255, 0.8);
+  box-shadow: 0 6px 20px rgba(0, 113, 255, 0.55), 0 0 12px rgba(77, 163, 255, 0.4);
+  transform: translateY(-2.5px) scale(1.04);
+  text-shadow: 0 0 8px rgba(143, 194, 255, 0.8);
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, #0071FF 0%, #1a56b0 100%);
+  border-color: #8FC2FF;
+  color: #FFFFFF;
+  box-shadow: 0 4px 18px rgba(0, 113, 255, 0.65), 0 0 10px rgba(77, 163, 255, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.tab-btn:active {
+  transform: scale(0.97);
+}
+
+.people-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  max-height: 380px;
+  overflow-y: auto;
+  pointer-events: auto;
+  position: relative;
+  z-index: 25;
+}
+
+.person-card {
+  background: rgba(4,9,26,0.85);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  padding: 14px 12px;
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 110px;
+  transition: all 0.2s ease;
+}
+
+.person-card:hover {
+  border-color: var(--focus);
+  transform: translateY(-2px);
+  background: rgba(8,26,53,0.9);
+}
+
+.person-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+
+.person-role {
+  font-size: 11px;
+  color: var(--sand);
+  line-height: 1.35;
+}
+
+.person-org {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--focus);
+  margin-top: 8px;
+}
+
+/* ========================================================
+   STAGE 5: Upper Midwest Atlas, Network & Contact (p: 0.82 - 1.00)
+   ======================================================== */
+.scene-atlas-container {
+  pointer-events: auto;
+}
+
+.atlas-top-row {
+  position: absolute;
+  top: 85px;
+  left: 40px;
+  right: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 16;
+}
+
+.atlas-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--focus);
+  max-width: 240px;
+  border-left: 2px solid var(--blue);
+  padding-left: 10px;
+}
+
+.atlas-summary {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  color: var(--white);
+  max-width: 680px;
+  text-align: right;
+}
+
+/* Dedicated Right-Side Operations Card */
+.atlas-right-card {
+  position: absolute;
+  right: 40px;
+  top: 175px;
+  width: 320px;
+  background: rgba(4,9,26,0.92);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  padding: 22px 20px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 18;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  pointer-events: auto;
+}
+
+.atlas-right-card-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--focus);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.atlas-right-card-heading {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+.atlas-right-card-text {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 16px;
+}
+
+/* Interactive Pins on Canvas */
+.pin-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 18;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  color: var(--white);
+  text-align: left;
+  pointer-events: auto;
+}
+
+.pin-disc {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 16px 2px rgba(0,113,255,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.pin-disc::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,113,255,0.5);
+  animation: pinPulse 2.4s infinite ease-out;
+}
+
+@keyframes pinPulse {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+.pin-disc-dots {
+  display: grid;
+  grid-template-columns: repeat(3, 3px);
+  grid-template-rows: repeat(3, 3px);
+  gap: 2px;
+}
+
+.pin-dot {
+  width: 3px;
+  height: 3px;
+  background: #FFFFFF;
+  border-radius: 50%;
+}
+
+.pin-label-box {
+  background: rgba(4,9,26,0.88);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 6px;
+  padding: 5px 10px;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.pin-label-tag {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--focus);
+  display: block;
+}
+
+.pin-label-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #FFFFFF;
+  display: block;
+  white-space: nowrap;
+}
+
+.pin-node:hover .pin-disc {
+  transform: scale(1.15);
+  background: #4da3ff;
+}
+
+.pin-node:hover .pin-label-box {
+  border-color: var(--focus);
+  transform: translateX(3px);
+}
+
+.partner-strip {
+  position: absolute;
+  bottom: 26px;
+  left: 40px;
+  right: 40px;
+  background: rgba(4,9,26,0.85);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 12px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(14px);
+  z-index: 17;
+}
+
+.partner-strip-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--sand);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.partner-logos-grid {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  overflow-x: auto;
+}
+
+.partner-logo-pill {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.concept-badge {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.05em;
+  pointer-events: none;
+  z-index: 30;
+}
+
+/* ========================================================
+   MODALS: Full Contact, About Detail, and Service Drawer
+   ======================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(1, 3, 15, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 120;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-window {
+  width: 720px;
+  max-width: calc(100vw - 40px);
+  max-height: calc(100dvh - 60px);
+  background: var(--panel-bg);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 14px;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.85);
+  overflow-y: auto;
+  padding: 36px;
+  position: relative;
+  transform: scale(0.97);
+  transition: transform 0.25s ease;
+}
+
+.modal-overlay.open .modal-window {
+  transform: scale(1);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  color: var(--white);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.modal-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--focus);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.modal-title {
+  font-family: var(--font-serif);
+  font-size: 38px;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 14px;
+}
+
+.contact-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.contact-form-full {
+  grid-column: span 2;
+}
+
+.form-group label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--sand);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--focus);
+  background: rgba(255,255,255,0.1);
+}
+
+.form-select option {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.form-submit-row {
+  grid-column: span 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.direct-phone-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--sand);
+}
+
+.direct-phone-badge a {
+  color: var(--focus);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Service Detail Drawer */
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(1, 3, 15, 0.45);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 24px 28px;
+}
+
+.dialog-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.drawer-panel {
+  width: 440px;
+  max-width: calc(100vw - 56px);
+  height: calc(100dvh - 48px);
+  max-height: 860px;
+  background: var(--panel-bg);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 14px;
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,0.85), 0 0 30px rgba(0,113,255,0.15);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(20px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dialog-overlay.open .drawer-panel {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  position: sticky;
+  top: 0;
+  background: rgba(4, 9, 26, 0.98);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+}
+
+.drawer-header-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--focus);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.drawer-header-title::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 8px var(--blue);
+}
+
+.drawer-close-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: var(--white);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.drawer-close-btn:hover {
+  background: rgba(255,255,255,0.18);
+  border-color: #FFFFFF;
+}
+
+.drawer-body {
+  padding: 28px 26px;
+  flex: 1;
+}
+
+.drawer-category {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--focus);
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+
+.drawer-title {
+  font-family: var(--font-serif);
+  font-size: 38px;
+  line-height: 1.08;
+  letter-spacing: -0.012em;
+  margin-bottom: 14px;
+  color: var(--white);
+}
+
+.drawer-deck {
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--sand);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.drawer-text {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 26px;
+}
+
+.drawer-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.12);
+  margin: 22px 0;
+}
+
+.drawer-section-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--hover);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.drawer-section-copy {
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 18px;
+}
+
+.drawer-disclosure {
+  border-left: 2px solid var(--blue);
+  padding-left: 12px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  line-height: 15px;
+  color: rgba(255,255,255,0.6);
+  margin: 24px 0 16px 0;
+}
+
+.drawer-footer {
+  padding: 16px 24px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(4,9,26,0.98);
+}
+
+.drawer-nav-btn {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.drawer-nav-btn:hover {
+  border-color: var(--focus);
+  background: rgba(0,113,255,0.15);
+}
+
+.drawer-counter {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--sand);
+}
+
+/* Mobile responsive drawer */
+.mobile-menu-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(1, 3, 15, 0.96);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  z-index: 95;
+  padding: 90px 28px 40px 28px;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-menu-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.mobile-menu-link {
+  font-family: var(--font-serif);
+  font-size: 30px;
+  color: var(--white);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 10px;
+}
+
+@media (max-width: 1100px) {
+  .utility-link {
+    display: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .nav-group {
+    display: none;
+  }
+  .mobile-hamburger {
+    display: flex;
+  }
+  .mobile-menu-overlay {
+    display: flex;
+  }
+  .header-bar {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 860px) {
+  .header-bar {
+    padding: 0 16px !important;
+    height: 64px !important;
+  }
+  .brand-wordmark {
+    font-size: 13.5px !important;
+  }
+  .brand-sub {
+    font-size: 8.5px !important;
+    letter-spacing: 0.05em !important;
+  }
+  .header-actions .aaron-btn {
+    padding: 5px 12px !important;
+    font-size: 11px !important;
+    min-height: 36px !important;
+  }
+  .mobile-hamburger {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  /* LOGICAL STAGE ON MOBILE: Natural screen-fitting container without shrinking */
+  #logical-stage {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    transform: none !important;
+    overflow: hidden !important;
+  }
+
+  /* ========================================================
+     STAGE 1 (HERO) ON MOBILE: Clean vertical layout, well below header
+     ======================================================== */
+  .scene-1-container {
+    padding: 100px 20px 30px 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    position: absolute !important;
+    inset: 0 !important;
+  }
+  .headline-veil {
+    display: none !important;
+  }
+  .hero-headline {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    font-size: clamp(28px, 7.5vw, 36px) !important;
+    line-height: 1.15 !important;
+    margin-bottom: 18px !important;
+    max-width: 100% !important;
+    color: #FFFFFF !important;
+  }
+  .hero-headline .line-mask {
+    overflow: visible !important;
+    display: block !important;
+    padding: 0 !important;
+  }
+  .hero-headline .line-inner {
+    transform: none !important;
+    display: inline !important;
+  }
+  .hero-btn-wrap {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    margin-bottom: 22px !important;
+  }
+  .hero-btn-wrap .aaron-btn {
+    padding: 8px 18px !important;
+    font-size: 12.5px !important;
+    min-height: 42px !important;
+  }
+  .supporting-copy {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+    right: auto !important;
+    max-width: 100% !important;
+  }
+  .supporting-intro {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #FFFFFF !important;
+    margin-bottom: 6px !important;
+  }
+  .supporting-text {
+    font-size: 13.5px !important;
+    line-height: 1.55 !important;
+    color: rgba(255, 255, 255, 0.88) !important;
+    max-width: 100% !important;
+  }
+  .scroll-hint {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    margin-top: 14px !important;
+    font-size: 11.5px !important;
+  }
+  .survey-svg, .survey-interactive-target, .survey-pill, .survey-annotation {
+    display: none !important;
+  }
+
+  /* ========================================================
+     STAGE 2 (SERVICES) ON MOBILE: Legible cards & clear typography
+     ======================================================== */
+  .scene-2-container {
+    padding: 85px 18px 30px 18px !important;
+    overflow-y: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+  .approach-veil {
+    display: none !important;
+  }
+  .approach-content {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    max-width: 100% !important;
+  }
+  .approach-label {
+    font-size: 11px !important;
+    color: var(--focus) !important;
+    margin-bottom: 6px !important;
+    letter-spacing: 0.08em !important;
+  }
+  .approach-heading {
+    font-size: clamp(22px, 6vw, 30px) !important;
+    line-height: 1.2 !important;
+    margin-bottom: 10px !important;
+    color: #FFFFFF !important;
+  }
+  .approach-lead {
+    font-size: 13.5px !important;
+    line-height: 1.55 !important;
+    margin-bottom: 16px !important;
+    color: rgba(255, 255, 255, 0.88) !important;
+  }
+  .services-row {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+  .service-card-item {
+    padding: 12px 14px !important;
+    border-radius: 10px !important;
+    background: rgba(4, 9, 26, 0.92) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  }
+  .service-num {
+    font-size: 10.5px !important;
+    color: var(--focus) !important;
+    margin-bottom: 2px !important;
+  }
+  .service-title {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #FFFFFF !important;
+    margin-bottom: 3px !important;
+  }
+  .service-snippet {
+    font-size: 12.5px !important;
+    line-height: 1.45 !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+  .service-card-action {
+    font-size: 11px !important;
+    color: var(--hover) !important;
+    margin-top: 6px !important;
+    font-weight: 600 !important;
+  }
+
+  /* ========================================================
+     STAGE 3 (ABOUT) ON MOBILE: Easy-to-read text & strong stat boxes
+     ======================================================== */
+  .scene-about-container {
+    padding: 85px 18px 30px 18px !important;
+    overflow-y: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+  .about-veil {
+    display: none !important;
+  }
+  .about-container-inner {
+    max-width: 100% !important;
+    text-align: left !important;
+  }
+  .about-label {
+    font-size: 11px !important;
+    color: var(--focus) !important;
+    margin-bottom: 6px !important;
+  }
+  .about-heading {
+    font-size: clamp(22px, 6vw, 30px) !important;
+    line-height: 1.2 !important;
+    margin-bottom: 12px !important;
+    color: #FFFFFF !important;
+  }
+  .about-grid-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    width: 100% !important;
+  }
+  .about-text-col {
+    width: 100% !important;
+  }
+  .about-p {
+    font-size: 13.5px !important;
+    line-height: 1.6 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    margin-bottom: 12px !important;
+  }
+  .about-actions {
+    display: flex !important;
+    gap: 10px !important;
+    margin-bottom: 14px !important;
+  }
+  .about-actions .aaron-btn {
+    padding: 7px 14px !important;
+    font-size: 11.5px !important;
+  }
+  .about-stats-col {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+  .stat-box {
+    padding: 12px 14px !important;
+    border-radius: 10px !important;
+    background: rgba(4, 9, 26, 0.92) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  }
+  .stat-num {
+    font-size: 26px !important;
+    font-weight: 700 !important;
+    color: var(--focus) !important;
+  }
+  .stat-label {
+    font-size: 11px !important;
+    letter-spacing: 0.08em !important;
+    color: var(--sand) !important;
+    text-transform: uppercase !important;
+  }
+  .stat-sub {
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+
+  /* ========================================================
+     STAGE 4 (LEADERSHIP) ON MOBILE: Readable 1-col cards
+     ======================================================== */
+  .scene-leadership-container {
+    padding: 85px 18px 30px 18px !important;
+    overflow-y: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+  .leadership-container-inner {
+    max-width: 100% !important;
+    text-align: left !important;
+  }
+  .leadership-label {
+    font-size: 11px !important;
+    color: var(--focus) !important;
+    margin-bottom: 6px !important;
+  }
+  .leadership-heading {
+    font-size: clamp(22px, 6vw, 30px) !important;
+    line-height: 1.2 !important;
+    margin-bottom: 12px !important;
+    color: #FFFFFF !important;
+  }
+  .people-nav-tabs {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    margin-bottom: 12px !important;
+  }
+  .people-tab-btn {
+    padding: 6px 12px !important;
+    font-size: 11.5px !important;
+    min-height: 36px !important;
+  }
+  .people-cards-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+  .people-card {
+    padding: 12px 14px !important;
+    border-radius: 10px !important;
+    background: rgba(4, 9, 26, 0.92) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    min-height: auto !important;
+  }
+  .people-name {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: #FFFFFF !important;
+    margin-bottom: 2px !important;
+  }
+  .people-role {
+    font-size: 12.5px !important;
+    color: var(--focus) !important;
+    margin-bottom: 2px !important;
+  }
+  .people-meta {
+    font-size: 11.5px !important;
+    color: rgba(230, 223, 214, 0.8) !important;
+  }
+
+  /* ========================================================
+     STAGE 5 (ATLAS) ON MOBILE: Clean vertical stack
+     ======================================================== */
+  .scene-atlas-container {
+    padding: 85px 18px 30px 18px !important;
+    overflow-y: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+  .atlas-left-col {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    max-width: 100% !important;
+    margin-bottom: 14px !important;
+    text-align: left !important;
+  }
+  .atlas-label {
+    font-size: 11px !important;
+    color: var(--focus) !important;
+  }
+  .atlas-heading {
+    font-size: clamp(22px, 6vw, 30px) !important;
+    line-height: 1.2 !important;
+    margin-bottom: 8px !important;
+    color: #FFFFFF !important;
+  }
+  .atlas-lead {
+    font-size: 13.5px !important;
+    line-height: 1.5 !important;
+    color: rgba(255, 255, 255, 0.88) !important;
+    margin-bottom: 12px !important;
+  }
+  .atlas-metrics {
+    display: flex !important;
+    gap: 8px !important;
+    margin-bottom: 14px !important;
+  }
+  .atlas-metric-box {
+    padding: 8px 12px !important;
+    border-radius: 8px !important;
+    background: rgba(4, 9, 26, 0.92) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  }
+  .atlas-metric-num {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    color: var(--focus) !important;
+  }
+  .atlas-metric-lbl {
+    font-size: 10.5px !important;
+    color: var(--sand) !important;
+  }
+  .atlas-btn-wrap {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    margin-top: 8px !important;
+  }
+  .atlas-btn-wrap .aaron-btn {
+    padding: 8px 16px !important;
+    font-size: 12px !important;
+  }
+  .pin-node {
+    display: none !important;
+  }
+  .atlas-right-card {
+    display: none !important;
+  }
+  .atlas-partners-band {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    margin-top: 14px !important;
+    margin-bottom: 24px !important;
+    background: rgba(4, 9, 26, 0.92) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 12px !important;
+    padding: 12px 14px !important;
+  }
+  .atlas-band-label {
+    font-size: 11px !important;
+    margin-bottom: 6px !important;
+    color: var(--hover) !important;
+  }
+  .atlas-chips-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+  .atlas-chip {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: #FFFFFF !important;
+  }
+
+  .preview-watermark {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .hero-headline .line-inner {
+    transform: none !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Fixed Viewport Stage -->
+<div id="viewport-stage" aria-hidden="false">
+
+  <!-- Background Media Elements with Continuous Opacity Cross-Fading -->
+  <div class="media-container" aria-hidden="true">
+    <img id="scene-img-1" class="scene-media active" src="./scene1.jpg" alt="Modern healthcare architecture in the Upper Midwest" onerror="if(this.src.indexOf('images/')===-1){this.src='./images/scene1.jpg';}else{this.style.display='none';}" />
+    <img id="scene-img-2" class="scene-media" src="./scene2.jpg" alt="Modern clinical corridor with natural lighting" onerror="if(this.src.indexOf('images/')===-1){this.src='./images/scene2.jpg';}else{this.style.display='none';}" />
+    <img id="scene-img-3" class="scene-media" src="./scene3.jpg" alt="Healthcare operations meeting room" onerror="if(this.src.indexOf('images/')===-1){this.src='./images/scene3.jpg';}else{this.style.display='none';}" />
+    <div class="atmosphere-overlay"></div>
+    <div class="top-gradient"></div>
+    <div class="bottom-gradient"></div>
+  </div>
+
+  <!-- Persistent Header Bar -->
+  <header class="header-bar">
+    <a href="#home" class="brand-group" id="brand-link" aria-label="HSI Solutions - Return to opening" onclick="scrollToProgress(0); return false;">
+      <svg class="brand-icon" viewBox="0 0 32 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g stroke="#FFFFFF" stroke-opacity="0.9" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 1 31 9.5v18.8L16 37 1 28.3V9.5ZM1 9.5 16 18l15-8.5M16 18v19M8.5 5.3 23.5 14v18.5M23.5 5.3 8.5 14v18.5M1 19l15 8.5L31 19M1 28.3 23.5 14M31 28.3 8.5 14"/>
+          <ellipse cx="16" cy="28" rx="9" ry="5.1"/>
+          <ellipse cx="16" cy="28" rx="6" ry="3.4"/>
+          <ellipse cx="16" cy="28" rx="3" ry="1.7"/>
+        </g>
+      </svg>
+      <div class="brand-text">
+        <span class="brand-wordmark">HSI SOLUTIONS</span>
+        <span class="brand-sub">EST. 1963 · NDHA SUBSIDIARY</span>
+      </div>
+    </a>
+
+    <!-- Center Navbar with Lighting Pop-Up Effect -->
+    <nav class="nav-group" id="desktop-nav" aria-label="Primary Navigation">
+      <button class="nav-link" id="nav-services" onclick="scrollToProgress(0.24)">SERVICES</button>
+      <button class="nav-link" id="nav-about" onclick="scrollToProgress(0.48)">ABOUT US</button>
+      <button class="nav-link" id="nav-leadership" onclick="scrollToProgress(0.70)">LEADERSHIP</button>
+      <button class="nav-link" id="nav-atlas" onclick="scrollToProgress(0.92)">NETWORK ATLAS</button>
+      <button class="nav-link" id="nav-contact" onclick="openContactModal()">CONTACT</button>
+    </nav>
+
+    <!-- Header Actions with Aaron Iker Button Hover Animation -->
+    <div class="header-actions">
+      <a href="https://mail.ndha.org/hsi/Login.aspx?ReturnUrl=%2fhsi" target="_blank" rel="noopener" class="utility-link">Pay a Bill</a>
+      <a href="tel:+17012249439" class="utility-link">(701) 224-9439</a>
+      <button class="aaron-btn" onclick="openContactModal()">
+        <span>GET IN TOUCH</span>
+        <div class="btn-arrow-capsule">
+          <div class="btn-arrow-icon">
+            <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+          </div>
+        </div>
+      </button>
+    </div>
+
+    <!-- Mobile Hamburger Toggle -->
+    <button class="mobile-hamburger" id="btn-mobile-menu" aria-label="Open navigation menu" aria-expanded="false">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Logical Scaled Desktop Stage (1280 x 720 reference) -->
+  <div id="logical-stage">
+
+    <!-- ==========================================
+         STAGE 1: Hero & Clinical HUD (p: 0.00 - 0.18)
+         ========================================== -->
+    <div class="stage-scene scene-1-container" id="scene-1-wrap">
+      <div class="headline-veil"></div>
+
+      <h1 class="hero-headline">
+        <span class="line-mask"><span class="line-inner" id="h-line-1">Where Healthcare Operations</span></span>
+        <span class="line-mask"><span class="line-inner" id="h-line-2">Meets Clinical Mission</span></span>
+        <span class="line-mask"><span class="line-inner italic-accent" id="h-line-3">and Rural Strength</span></span>
+      </h1>
+
+      <div class="hero-btn-wrap">
+        <button class="aaron-btn aaron-btn-glass" id="hero-cta-btn" onclick="openContactModal()" aria-label="Connect with HSI Solutions">
+          <span>CONNECT WITH US</span>
+          <div class="btn-arrow-capsule">
+            <div class="btn-arrow-icon">
+              <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <div class="supporting-copy" id="hero-support">
+        <p class="supporting-intro">Simple systems. Stronger care.</p>
+        <p class="supporting-text">
+          Operations support, group purchasing power, and clinical governance built specifically for rural and critical access hospitals across North Dakota, South Dakota, Minnesota, and Montana.
+        </p>
+      </div>
+
+      <div class="scroll-hint" id="hero-scroll-hint">
+        <svg class="scroll-hint-icon" viewBox="0 0 32 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 1 31 9.5v18.8L16 37 1 28.3V9.5ZM1 9.5 16 18l15-8.5M16 18v19"/>
+          </g>
+        </svg>
+        <span>Scroll to explore</span>
+      </div>
+
+      <!-- Surveying Clinical HUD SVG overlay -->
+      <svg class="survey-svg" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line x1="762.5" y1="374" x2="762.5" y2="452" stroke="rgba(255,255,255,0.78)" stroke-width="1" stroke-dasharray="1.6 2.8"/>
+        <line x1="731" y1="406.5" x2="857" y2="406.5" stroke="rgba(255,255,255,0.78)" stroke-width="1" stroke-dasharray="1.6 2.8"/>
+        <circle cx="762.5" cy="406.5" r="14" stroke="rgba(0,113,255,0.6)" stroke-width="1" stroke-dasharray="2 3"/>
+        <circle cx="762.5" cy="406.5" r="32" stroke="rgba(255,255,255,0.25)" stroke-width="0.8"/>
+        <path d="M759.5 406.5H765.5M762.5 403.5V409.5" stroke="#FFFFFF" stroke-width="1"/>
+        <path d="M762.5 406.5L840 436H885" stroke="rgba(0,113,255,0.75)" stroke-width="1"/>
+      </svg>
+
+      <button class="survey-interactive-target" onclick="openFieldNotes(0)" aria-label="Inspect Bismarck clinical operations data" title="Open Field Notes"></button>
+      <div class="survey-pill" onclick="openFieldNotes(0)">HEALTHCARE</div>
+      <div class="survey-annotation" id="scramble-annotation" onclick="openFieldNotes(0)">
+        OPERATIONS<br>FOR CHANGE
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STAGE 2: Services Explorer (p: 0.18 - 0.40)
+         ========================================== -->
+    <div class="stage-scene scene-2-container" id="scene-2-wrap">
+      <div class="approach-veil"></div>
+      <div class="approach-content">
+        <div class="approach-label">OUR CORE PRACTICE · 4 ESSENTIAL SERVICES</div>
+        <h2 class="approach-heading">
+          From Fragmented Operations<br>
+          to Grounded, Reliable Strength
+        </h2>
+        <p class="approach-lead">
+          We bring clarity, structure, and expert shared services to healthcare leadership, allowing doctors and nurses to focus entirely on providing exceptional patient care.
+        </p>
+
+        <!-- 4 Key Services Grid -->
+        <div class="services-row">
+          <div class="service-card-item" onclick="openFieldNotes(0)">
+            <div>
+              <div class="service-num">01 / REVENUE CYCLE</div>
+              <h3 class="service-title">Medical Collections</h3>
+              <p class="service-snippet">Early-out, self-pay follow-up, and bad-debt recovery with HIPAA-compliant communication. <em>"Every account is a patient. Every patient is a person."</em></p>
+            </div>
+            <div class="service-card-action">EXPLORE SERVICE →</div>
+          </div>
+
+          <div class="service-card-item" onclick="openFieldNotes(1)">
+            <div>
+              <div class="service-num">02 / GROUP PURCHASING</div>
+              <h3 class="service-title">Supply Chain</h3>
+              <p class="service-snippet">Leveraging Vizient—the nation’s largest healthcare GPO—coupled with on-site Bismarck data advocacy to reinvest volume savings into care.</p>
+            </div>
+            <div class="service-card-action">EXPLORE SERVICE →</div>
+          </div>
+
+          <div class="service-card-item" onclick="openFieldNotes(2)">
+            <div>
+              <div class="service-num">03 / CLINICAL QUALITY</div>
+              <h3 class="service-title">Peer Review</h3>
+              <p class="service-snippet">External, multi-specialty clinical peer review executed on a secure digital platform. Protecting medical staff credentials and compliance.</p>
+            </div>
+            <div class="service-card-action">EXPLORE SERVICE →</div>
+          </div>
+
+          <div class="service-card-item" onclick="openFieldNotes(3)">
+            <div>
+              <div class="service-num">04 / VENDOR ALLIANCE</div>
+              <h3 class="service-title">Strategic Partners</h3>
+              <p class="service-snippet">Pre-vetted portfolio addressing workforce, pharmacy 340B, cybersecurity, and revenue cycle with pre-negotiated member pricing.</p>
+            </div>
+            <div class="service-card-action">EXPLORE SERVICE →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STAGE 3: About Us & 62-Year Story (p: 0.40 - 0.62)
+         ========================================== -->
+    <div class="stage-scene scene-about-container" id="scene-about-wrap">
+      <div class="about-veil"></div>
+      <div class="about-grid-content">
+        <div class="about-text-col">
+          <div class="about-tagline">ABOUT HSI SOLUTIONS · FOUNDED 1963</div>
+          <h2 class="about-main-heading">
+            Empowering Healthcare Excellence<br>
+            Across the Upper Midwest
+          </h2>
+
+          <div class="about-paragraphs">
+            <p>
+              <strong>For sixty-two years</strong>, HSI Solutions has stood beside community and critical access hospitals, helping leadership navigate the ever-shifting terrain of healthcare administration. We believe that operational efficiency should never come at the expense of clinical excellence.
+            </p>
+            <p>
+              As a wholly owned subsidiary of the <strong>North Dakota Hospital Association (NDHA)</strong>, our purpose is singular: to bridge the gap between high-level hospital strategy and daily execution. From frontier clinics to regional health centers, we transform operational friction into sustainable financial strength.
+            </p>
+            <p>
+              We move beyond guesswork. By uniting advanced analytics, national GPO buying volume through Vizient, and deeply personal hometown relationships, we ensure that every dollar saved and every process refined is a direct reinvestment in the health of your neighbors.
+            </p>
+            <p>
+              <em>"Our mission is to bring clarity, structure, and expert services to healthcare operations, allowing clinicians to focus on providing care."</em>
+            </p>
+          </div>
+
+          <div style="margin-top: 18px; display:flex; gap: 14px; align-items:center;">
+            <button class="aaron-btn" onclick="openAboutModal()">
+              <span>READ FULL STORY</span>
+              <div class="btn-arrow-capsule">
+                <div class="btn-arrow-icon">
+                  <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                </div>
+              </div>
+            </button>
+            <button class="aaron-btn aaron-btn-glass" onclick="openContactModal()">
+              <span>MEET LEADERSHIP</span>
+              <div class="btn-arrow-capsule">
+                <div class="btn-arrow-icon">
+                  <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <div class="about-stats-col">
+          <div class="stat-glass-card">
+            <div class="stat-number">62+</div>
+            <div class="stat-label">Years of Regional Stewardship</div>
+            <div class="stat-desc">Continuous service to acute and non-acute providers in North Dakota, South Dakota, Minnesota, and Montana since 1963.</div>
+          </div>
+
+          <div class="stat-glass-card">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Nonprofit Subsidiary Integrity</div>
+            <div class="stat-desc">Wholly owned by the North Dakota Hospital Association. Governance directed by active regional hospital CEOs.</div>
+          </div>
+
+          <div class="stat-glass-card">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">Pre-Vetted Strategic Alliances</div>
+            <div class="stat-desc">Carefully selected vendor partnerships across workforce staffing, revenue integrity, pharmacy, and capital planning.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STAGE 4: Leadership & Board of Directors (p: 0.62 - 0.82)
+         (Buttons fixed with Pop-Up Lighting Effect & Priority Stacking)
+         ========================================== -->
+    <div class="stage-scene scene-leadership-container" id="scene-leadership-wrap">
+      <div class="leadership-header">
+        <div class="leadership-title-group">
+          <p>GOVERNANCE & LOCAL EXPERTISE</p>
+          <h2>Leadership & Board of Directors</h2>
+        </div>
+        <div class="leadership-tabs">
+          <button class="tab-btn active" id="tab-staff" onclick="switchPeopleTab('staff')">Operations Staff</button>
+          <button class="tab-btn" id="tab-board" onclick="switchPeopleTab('board')">Board of Directors</button>
+          <button class="tab-btn" onclick="openAboutModal()">View Full Biographies</button>
+        </div>
+      </div>
+
+      <!-- Staff Grid -->
+      <div class="people-cards-grid" id="staff-grid">
+        <div class="person-card">
+          <div>
+            <div class="person-name">Rob Field</div>
+            <div class="person-role">Director</div>
+          </div>
+          <div class="person-org">HSI Bismarck HQ</div>
+        </div>
+
+        <div class="person-card">
+          <div>
+            <div class="person-name">Dan Gannon</div>
+            <div class="person-role">GPO Account Executive</div>
+          </div>
+          <div class="person-org">Supply Chain & Vizient</div>
+        </div>
+
+        <div class="person-card">
+          <div>
+            <div class="person-name">DeAnn Berreth</div>
+            <div class="person-role">Office Manager</div>
+          </div>
+          <div class="person-org">Administration</div>
+        </div>
+
+        <div class="person-card">
+          <div>
+            <div class="person-name">Penny Paddock</div>
+            <div class="person-role">Account Specialist</div>
+          </div>
+          <div class="person-org">Medical Collections</div>
+        </div>
+
+        <div class="person-card">
+          <div>
+            <div class="person-name">Jenny Stetson</div>
+            <div class="person-role">Account Specialist</div>
+          </div>
+          <div class="person-org">Medical Collections</div>
+        </div>
+
+        <div class="person-card">
+          <div>
+            <div class="person-name">Wanda Rohrich</div>
+            <div class="person-role">Account Specialist</div>
+          </div>
+          <div class="person-org">Medical Collections</div>
+        </div>
+
+        <div class="person-card">
+          <div>
+            <div class="person-name">Jamie Wosick</div>
+            <div class="person-role">Account Specialist</div>
+          </div>
+          <div class="person-org">Medical Collections</div>
+        </div>
+
+        <div class="person-card">
+          <div>
+            <div class="person-name">Shannon Kahl</div>
+            <div class="person-role">Office Support</div>
+          </div>
+          <div class="person-org">Operations Support</div>
+        </div>
+
+        <div class="person-card">
+          <div>
+            <div class="person-name">Carol Jones</div>
+            <div class="person-role">Office Support</div>
+          </div>
+          <div class="person-org">Operations Support</div>
+        </div>
+      </div>
+
+      <!-- Board Grid -->
+      <div class="people-cards-grid" id="board-grid" style="display:none;">
+        <div class="person-card">
+          <div>
+            <div class="person-name">Alyson Kornele</div>
+            <div class="person-role">Chief Executive Officer</div>
+          </div>
+          <div class="person-org">West River Health Services (Hettinger, ND)</div>
+        </div>
+
+        <div class="person-card">
+          <div>
+            <div class="person-name">Lisa LeTexier</div>
+            <div class="person-role">Chief Executive Officer</div>
+          </div>
+          <div class="person-org">Pembina County Memorial (Cavalier, ND)</div>
+        </div>
+
+        <div class="person-card">
+          <div>
+            <div class="person-name">Teresa Mallett</div>
+            <div class="person-role">Chief Executive Officer</div>
+          </div>
+          <div class="person-org">Madison Hospital (Madison, SD)</div>
+        </div>
+
+        <div class="person-card">
+          <div>
+            <div class="person-name">Kurt Waldbillig</div>
+            <div class="person-role">Chief Executive Officer</div>
+          </div>
+          <div class="person-org">Sakakawea Medical Center (Hazen, ND)</div>
+        </div>
+
+        <div class="person-card">
+          <div>
+            <div class="person-name">Jody Nelson</div>
+            <div class="person-role">Chief Executive Officer</div>
+          </div>
+          <div class="person-org">St. Luke's Medical Center (Crosby, ND)</div>
+        </div>
+
+        <div class="person-card">
+          <div>
+            <div class="person-name">Tim Blasl</div>
+            <div class="person-role">President</div>
+          </div>
+          <div class="person-org">North Dakota Hospital Association</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STAGE 5: Upper Midwest Atlas, Network & Contact (p: 0.82 - 1.00)
+         ========================================== -->
+    <div class="stage-scene scene-atlas-container" id="scene-atlas-wrap">
+      <div class="atlas-top-row">
+        <div class="atlas-eyebrow">
+          UPPER MIDWEST<br>
+          HEALTHCARE ALLIANCE<br>
+          EST. 1963
+        </div>
+        <h2 class="atlas-summary">
+          Serving acute and critical access hospitals across North Dakota, South Dakota, Minnesota, and Montana for over 62 years.
+        </h2>
+      </div>
+
+      <!-- Dedicated Right-Side Operations Card -->
+      <div class="atlas-right-card">
+        <div class="atlas-right-card-title">REGIONAL OPERATIONS HUB</div>
+        <h3 class="atlas-right-card-heading">Bismarck Executive Center</h3>
+        <p class="atlas-right-card-text">
+          Direct operations, billing advocacy, group purchasing audits, and peer review coordination tailored specifically for independent Upper Midwest health facilities.
+        </p>
+        <button class="aaron-btn" onclick="openContactModal()" style="width:100%;">
+          <span>START CONVERSATION</span>
+          <div class="btn-arrow-capsule">
+            <div class="btn-arrow-icon">
+              <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <!-- Interactive Facility / Service Pins -->
+      <button class="pin-node" style="left: 28%; top: 52%;" onclick="openFieldNotes(0)" aria-label="Bismarck Headquarters & Shared Services">
+        <div class="pin-disc">
+          <div class="pin-disc-dots">
+            <div></div><div class="pin-dot"></div><div></div>
+            <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+            <div></div><div class="pin-dot"></div><div></div>
+          </div>
+        </div>
+        <div class="pin-label-box">
+          <span class="pin-label-tag">CENTRAL HUB</span>
+          <span class="pin-label-title">Bismarck Operations</span>
+        </div>
+      </button>
+
+      <button class="pin-node" style="left: 55%; top: 48%;" onclick="openFieldNotes(1)" aria-label="Supply Chain & Vizient Alliance">
+        <div class="pin-disc">
+          <div class="pin-disc-dots">
+            <div></div><div class="pin-dot"></div><div></div>
+            <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+            <div></div><div class="pin-dot"></div><div></div>
+          </div>
+        </div>
+        <div class="pin-label-box">
+          <span class="pin-label-tag">SUPPLY CHAIN</span>
+          <span class="pin-label-title">Vizient Alliance</span>
+        </div>
+      </button>
+
+      <button class="pin-node" style="left: 14%; top: 68%;" onclick="openFieldNotes(2)" aria-label="Peer Review Clinical Network">
+        <div class="pin-disc">
+          <div class="pin-disc-dots">
+            <div></div><div class="pin-dot"></div><div></div>
+            <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+            <div></div><div class="pin-dot"></div><div></div>
+          </div>
+        </div>
+        <div class="pin-label-box">
+          <span class="pin-label-tag">CLINICAL GOVERNANCE</span>
+          <span class="pin-label-title">Peer Review Network</span>
+        </div>
+      </button>
+
+      <button class="pin-node" style="left: 44%; top: 72%;" onclick="openFieldNotes(3)" aria-label="Strategic Partner Portfolio">
+        <div class="pin-disc">
+          <div class="pin-disc-dots">
+            <div></div><div class="pin-dot"></div><div></div>
+            <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+            <div></div><div class="pin-dot"></div><div></div>
+          </div>
+        </div>
+        <div class="pin-label-box">
+          <span class="pin-label-tag">STRATEGIC PARTNERS</span>
+          <span class="pin-label-title">Vetted Vendor Program</span>
+        </div>
+      </button>
+
+      <!-- Partner Strip -->
+      <div class="partner-strip">
+        <div class="partner-strip-label">STRATEGIC PARTNERS</div>
+        <div class="partner-logos-grid">
+          <span class="partner-logo-pill">AblePay</span>
+          <span class="partner-logo-pill">Jackson</span>
+          <span class="partner-logo-pill">MCAG</span>
+          <span class="partner-logo-pill">Medical Solutions</span>
+          <span class="partner-logo-pill">Modern Capital</span>
+          <span class="partner-logo-pill">SunRx</span>
+          <span class="partner-logo-pill">ModusOne</span>
+          <span class="partner-logo-pill">Paymerang</span>
+          <span class="partner-logo-pill">Lumifi</span>
+          <span class="partner-logo-pill">Vert</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Concept Preview Tag -->
+    <div class="concept-badge">Concept preview, not the live site · HSI Solutions Bismarck, ND</div>
+  </div>
+</div>
+
+<!-- Mobile Navigation Drawer -->
+<div class="mobile-menu-overlay" id="mobile-menu" aria-hidden="true">
+  <div class="mobile-menu-links">
+    <a href="#services" class="mobile-menu-link" onclick="closeMobileMenu(); scrollToProgress(0.24);">Services</a>
+    <a href="#about" class="mobile-menu-link" onclick="closeMobileMenu(); scrollToProgress(0.48);">About HSI (62 Years)</a>
+    <a href="#leadership" class="mobile-menu-link" onclick="closeMobileMenu(); scrollToProgress(0.70);">Leadership & Board</a>
+    <a href="#network" class="mobile-menu-link" onclick="closeMobileMenu(); scrollToProgress(0.92);">Upper Midwest Atlas</a>
+    <a href="javascript:void(0)" class="mobile-menu-link" onclick="closeMobileMenu(); openContactModal();">Contact Us</a>
+    <a href="https://mail.ndha.org/hsi/Login.aspx?ReturnUrl=%2fhsi" target="_blank" rel="noopener" class="mobile-menu-link">Pay a Bill</a>
+    <a href="tel:+17012249439" class="mobile-menu-link">Call (701) 224-9439</a>
+  </div>
+  <button class="aaron-btn" onclick="closeMobileMenu(); openContactModal();" style="width:100%;">
+    <span>CONNECT WITH LEADERSHIP</span>
+    <div class="btn-arrow-capsule">
+      <div class="btn-arrow-icon">
+        <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+      </div>
+    </div>
+  </button>
+</div>
+
+<!-- ==========================================
+     MODAL: Dedicated Contact Us Page
+     ========================================== -->
+<div class="modal-overlay" id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-heading" onclick="onModalBackdropClick(event, 'contact-modal')">
+  <div class="modal-window" onclick="event.stopPropagation()">
+    <button class="modal-close-btn" onclick="closeContactModal()" aria-label="Close dialog">✕</button>
+    <div class="modal-tag">DIRECT INQUIRY · BISMARCK, ND</div>
+    <h2 class="modal-title" id="contact-heading">Get in Touch with HSI Solutions</h2>
+    <p style="font-size:14px; line-height:1.55; color:rgba(255,255,255,0.85); margin-bottom:18px;">
+      Whether you are exploring group purchasing discounts through Vizient, seeking patient-first revenue cycle recovery, or requiring external clinical peer review, our team is ready to assist.
+    </p>
+
+    <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:16px; margin-bottom:20px; display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+      <div>
+        <div style="font-family:var(--font-mono); font-size:10px; color:var(--focus); text-transform:uppercase;">PHYSICAL & MAILING ADDRESS</div>
+        <div style="font-size:13px; color:var(--white); line-height:1.4; margin-top:4px;">1622 E Interstate Ave, PO Box 7340<br>Bismarck, ND 58503</div>
+      </div>
+      <div>
+        <div style="font-family:var(--font-mono); font-size:10px; color:var(--focus); text-transform:uppercase;">PHONE & AFFILIATION</div>
+        <div style="font-size:13px; color:var(--white); line-height:1.4; margin-top:4px;">
+          Direct: <a href="tel:+17012249439" style="color:var(--hover); text-decoration:none;">(701) 224-9439</a><br>
+          Toll-Free: <a href="tel:+18004420462" style="color:var(--hover); text-decoration:none;">1-800-442-0462</a>
+        </div>
+      </div>
+    </div>
+
+    <form onsubmit="handleContactSubmit(event)" class="contact-form-grid">
+      <div class="form-group">
+        <label for="c-name">Full Name *</label>
+        <input type="text" id="c-name" class="form-input" placeholder="e.g. Dr. Sarah Miller" required>
+      </div>
+
+      <div class="form-group">
+        <label for="c-facility">Healthcare Facility / Organization *</label>
+        <input type="text" id="c-facility" class="form-input" placeholder="e.g. Prairie Memorial Hospital" required>
+      </div>
+
+      <div class="form-group">
+        <label for="c-email">Work Email Address *</label>
+        <input type="email" id="c-email" class="form-input" placeholder="smiller@hospital.org" required>
+      </div>
+
+      <div class="form-group">
+        <label for="c-service">Primary Area of Interest *</label>
+        <select id="c-service" class="form-select" required>
+          <option value="" disabled selected>Select an operational service...</option>
+          <option value="collections">Medical Collections & Revenue Cycle</option>
+          <option value="supply">Supply Chain & Vizient Group Purchasing</option>
+          <option value="peer">Peer Review Network & Quality Governance</option>
+          <option value="strategic">Strategic Partner Program (Workforce / 340B)</option>
+          <option value="general">General Executive Inquiry</option>
+        </select>
+      </div>
+
+      <div class="form-group contact-form-full">
+        <label for="c-message">How can HSI support your operational goals?</label>
+        <textarea id="c-message" class="form-textarea" rows="3" placeholder="Tell us about your facility's current priorities or questions..."></textarea>
+      </div>
+
+      <div class="form-submit-row">
+        <div class="direct-phone-badge">
+          Prefer phone? Call <a href="tel:+17012249439">(701) 224-9439</a>
+        </div>
+        <button type="submit" class="aaron-btn">
+          <span>SEND INQUIRY</span>
+          <div class="btn-arrow-capsule">
+            <div class="btn-arrow-icon">
+              <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </div>
+          </div>
+        </button>
+      </div>
+    </form>
+    <div id="contact-success-msg" style="display:none; color:#a7e3c4; font-family:var(--font-mono); font-size:12px; margin-top:16px;">
+      ✓ Inquiry recorded. In production, this routes directly to Rob Field and Dan Gannon in Bismarck.
+    </div>
+  </div>
+</div>
+
+<!-- ==========================================
+     MODAL: Dedicated About Us Page
+     ========================================== -->
+<div class="modal-overlay" id="about-modal" role="dialog" aria-modal="true" aria-labelledby="about-heading" onclick="onModalBackdropClick(event, 'about-modal')">
+  <div class="modal-window" onclick="event.stopPropagation()">
+    <button class="modal-close-btn" onclick="closeAboutModal()" aria-label="Close dialog">✕</button>
+    <div class="modal-tag">OUR HERITAGE · 62 YEARS OF TRUST</div>
+    <h2 class="modal-title" id="about-heading">About HSI Solutions</h2>
+
+    <div style="font-size:14px; line-height:1.7; color:rgba(255,255,255,0.88); display:flex; flex-direction:column; gap:16px;">
+      <p>
+        <strong>For sixty-two years</strong>, HSI Solutions (Hospital Services, Inc.) has dedicated itself to simplifying the complexities of healthcare operations for community and critical access providers throughout the Upper Midwest.
+      </p>
+      <p>
+        Founded in 1963 as a wholly owned subsidiary of the <strong>North Dakota Hospital Association (NDHA)</strong>, our organization was created with a clear imperative: to ensure that independent and rural hospitals could access the scale, purchasing leverage, and specialized operational acumen typically reserved for major metropolitan hospital conglomerates.
+      </p>
+      <p>
+        We believe deeply that operational efficiency must never come at the expense of clinical excellence or hometown trust. In community healthcare, every patient is a neighbor, a family member, or a colleague. That is why our collections process is founded upon dignity, transparent reporting, and patient advocacy.
+      </p>
+      <p>
+        Through our long-term strategic alliance with <strong>Vizient</strong>, we channel Tier-1 national group purchasing contracts into the hands of local hospital administrators, delivering aggressive supply savings that are reinvested directly into patient bedside care and state-of-the-art diagnostic technology.
+      </p>
+      <p>
+        Governed by a Board of Directors comprised of active, visionary hospital CEOs across North Dakota and South Dakota, HSI Solutions remains firmly grounded in the realities of regional healthcare delivery.
+      </p>
+    </div>
+
+    <div style="margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,0.15); display:flex; justify-content:space-between; align-items:center;">
+      <div style="font-family:var(--font-mono); font-size:11px; color:var(--sand);">Bismarck, North Dakota · Established 1963</div>
+      <button class="aaron-btn" onclick="closeAboutModal(); openContactModal();">
+        <span>CONTACT LEADERSHIP</span>
+        <div class="btn-arrow-capsule">
+          <div class="btn-arrow-icon">
+            <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ==========================================
+     DRAWER: Field Notes / Service Detail
+     ========================================== -->
+<div class="dialog-overlay" id="field-notes-modal" role="dialog" aria-modal="true" aria-labelledby="drawer-heading" onclick="onBackdropClick(event, 'field-notes-modal')">
+  <div class="drawer-panel" onclick="event.stopPropagation()">
+    <div class="drawer-header">
+      <div class="drawer-header-title" id="drawer-heading">HSI OPERATIONS / SERVICE BRIEF</div>
+      <button class="drawer-close-btn" onclick="closeFieldNotes()" aria-label="Close details">✕</button>
+    </div>
+
+    <div class="drawer-body">
+      <div class="drawer-category" id="note-kind">01 / REVENUE CYCLE</div>
+      <h2 class="drawer-title" id="note-name">Medical Collections</h2>
+      <div class="drawer-deck" id="note-deck">Compassionate recovery preserving patient trust.</div>
+      <p class="drawer-text" id="note-history">
+        Early-out, self-pay follow-up, and bad-debt recovery engineered specifically for community and critical access hospitals. HIPAA-compliant communications across phone, mail, and digital touchpoints protect the hospital’s standing in its hometown.
+      </p>
+
+      <div class="drawer-divider"></div>
+
+      <div class="drawer-section-label">OPERATIONAL PRINCIPLE</div>
+      <p class="drawer-section-copy" id="note-detail">
+        "Every account is a patient. Every patient is a person." Transparent reporting and patient-advocacy principles guide every interaction.
+      </p>
+
+      <div class="drawer-section-label">THE LEADERSHIP QUESTION</div>
+      <p class="drawer-section-copy" id="note-question">
+        How can community hospitals sustain operating margins without compromising the trust and dignity of their local patient population?
+      </p>
+
+      <div class="drawer-disclosure">
+        Verified operational data from HSI Solutions (Hospital Services, Inc.), a wholly owned subsidiary of the North Dakota Hospital Association.
+      </div>
+    </div>
+
+    <div class="drawer-footer">
+      <button class="drawer-nav-btn" onclick="prevNote()">← PREVIOUS</button>
+      <div class="drawer-counter" id="note-counter">01 / 04</div>
+      <button class="drawer-nav-btn" onclick="nextNote()">NEXT →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Field Notes Data verbatim for HSI Solutions */
+const fieldNotesData = [
+  {
+    name: "Medical Collections",
+    kind: "01 / REVENUE CYCLE & TRUST",
+    deck: "Compassionate recovery preserving patient-provider relationships.",
+    history: "Early-out, self-pay follow-up, and bad-debt recovery designed specifically for critical access and rural community providers. Using HIPAA-compliant phone, mail, and digital communication alongside transparent reporting, HSI preserves the bond between clinicians and local families.",
+    detail: "Every account is a patient. Every patient is a person. Transparent recovery schedules protect community goodwill.",
+    question: "How can community hospitals safeguard operating margins while treating neighbors with dignity and clinical empathy?"
+  },
+  {
+    name: "Supply Chain Optimization",
+    kind: "02 / PURCHASING & ADVOCACY",
+    deck: "National group purchasing power anchored by local advocacy.",
+    history: "Through our long-standing partnership with Vizient, the nation's largest healthcare group purchasing organization (GPO), HSI brings Fortune-500 scale pricing to regional health systems. Local data analytics uncover immediate supply savings, reinvested directly into bedside patient care.",
+    detail: "Direct Vizient contract access combined with dedicated on-site account specialists in Bismarck.",
+    question: "How do independent hospitals capture Tier-1 volume discounts without surrendering clinical product preferences?"
+  },
+  {
+    name: "Peer Review Network",
+    kind: "03 / CLINICAL GOVERNANCE",
+    deck: "External, rigorous clinical review by independent medical specialists.",
+    history: "Delivered securely on a modern digital platform, HSI's Peer Review Network connects rural and community medical staffs with experienced physician reviewers across diverse specialties. The program supports regulatory compliance, credentialing, and ongoing quality assurance.",
+    detail: "Fully objective, multi-specialty reviews meeting stringent regulatory and credentialing guidelines.",
+    question: "Which clinical specialties require external objective evaluation to ensure the highest standards of rural patient safety?"
+  },
+  {
+    name: "Strategic Partner Program",
+    kind: "04 / VETTED INNOVATION",
+    deck: "A pre-vetted portfolio solving workforce, revenue, and capital challenges.",
+    history: "A rigorously filtered alliance of proven healthcare vendors. Rather than vetting dozens of unknown suppliers, hospital executives rely on HSI's proven partners: AblePay, Jackson, MCAG, Medical Solutions, Modern Capital, SunRx, ModusOne Health, Paymerang, Lumifi, and Vert.",
+    detail: "Pre-negotiated contract protections across revenue recovery, staffing, pharmacy 340B, and cybersecurity.",
+    question: "How can hospital executives accelerate technological transformation while shielding their teams from vendor fatigue?"
+  }
+];
+
+let currentNoteIndex = 0;
+
+/* Logical Desktop Stage Scaling */
+function updateStageScale() {
+  const stage = document.getElementById('logical-stage');
+  if (!stage) return;
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  
+  if (vw <= 860) {
+    stage.style.width = '100%';
+    stage.style.height = '100%';
+    stage.style.transform = 'none';
+    return;
+  }
+  
+  const s = Math.min(vw / 1280, vh / 720);
+  const stageW = vw / s;
+  const stageH = vh / s;
+  
+  stage.style.width = stageW + 'px';
+  stage.style.height = stageH + 'px';
+  stage.style.transform = `scale(${s})`;
+  stage.style.transformOrigin = 'top left';
+}
+
+window.addEventListener('resize', updateStageScale);
+updateStageScale();
+
+/* Entrance Animation Sequence */
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    const l1 = document.getElementById('h-line-1');
+    const l2 = document.getElementById('h-line-2');
+    const l3 = document.getElementById('h-line-3');
+    if (l1) l1.style.transform = 'translateY(0)';
+    setTimeout(() => { if (l2) l2.style.transform = 'translateY(0)'; }, 160);
+    setTimeout(() => { if (l3) l3.style.transform = 'translateY(0)'; }, 320);
+  }, 180);
+
+  setTimeout(runAnnotationScramble, 1340);
+});
+
+function runAnnotationScramble() {
+  const el = document.getElementById('scramble-annotation');
+  if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const target = "OPERATIONS\nFOR CHANGE";
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/+-";
+  let step = 0;
+  const interval = setInterval(() => {
+    step++;
+    let out = "";
+    for (let i = 0; i < target.length; i++) {
+      if (target[i] === "\n") {
+        out += "<br>";
+      } else if (i < step) {
+        out += target[i];
+      } else {
+        out += chars[Math.floor(Math.random() * chars.length)];
+      }
+    }
+    el.innerHTML = out;
+    if (step >= target.length) {
+      clearInterval(interval);
+      el.innerHTML = "OPERATIONS<br>FOR CHANGE";
+    }
+  }, 50);
+}
+
+/* Scroll Choreography & Smooth Mathematical Background Cross-Fades */
+let targetProgress = 0;
+let displayedProgress = 0;
+let lastTimestamp = performance.now();
+
+function onScroll() {
+  const scrollY = window.scrollY || window.pageYOffset;
+  const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  targetProgress = Math.max(0, Math.min(1, scrollY / maxScroll));
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+
+function clamp(v, min, max) {
+  return Math.max(min, Math.min(max, v));
+}
+
+function ramp(p, a, b) {
+  return clamp((p - a) / (b - a), 0, 1);
+}
+
+function easeOutCubic(t) {
+  return 1 - Math.pow(1 - t, 3);
+}
+
+function easeInOutQuad(t) {
+  return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+}
+
+function animationLoop(now) {
+  const dt = Math.min(64, now - lastTimestamp);
+  lastTimestamp = now;
+  const smoothing = 1 - Math.pow(1 - 0.12, dt / 16.667);
+  displayedProgress += (targetProgress - displayedProgress) * smoothing;
+
+  renderScenes(displayedProgress);
+  requestAnimationFrame(animationLoop);
+}
+requestAnimationFrame(animationLoop);
+
+function renderScenes(p) {
+  const img1 = document.getElementById('scene-img-1');
+  const img2 = document.getElementById('scene-img-2');
+  const img3 = document.getElementById('scene-img-3');
+  
+  const stage1 = document.getElementById('scene-1-wrap');
+  const stage2 = document.getElementById('scene-2-wrap');
+  const stage3 = document.getElementById('scene-about-wrap');
+  const stage4 = document.getElementById('scene-leadership-wrap');
+  const stage5 = document.getElementById('scene-atlas-wrap');
+
+  // ========================================================
+  // ULTRA-SMOOTH CONTINUOUS BACKGROUND CROSS-DISSOLVE
+  // ========================================================
+  let opImg1 = 0;
+  let opImg2 = 0;
+  let opImg3 = 0;
+
+  if (p <= 0.20) {
+    opImg1 = 1;
+    opImg2 = 0;
+    opImg3 = 0;
+  } else if (p > 0.20 && p <= 0.36) {
+    // Smooth crossfade from image 1 to image 2
+    const t = easeInOutQuad((p - 0.20) / 0.16);
+    opImg1 = 1 - t;
+    opImg2 = t;
+    opImg3 = 0;
+  } else if (p > 0.36 && p <= 0.58) {
+    opImg1 = 0;
+    opImg2 = 1;
+    opImg3 = 0;
+  } else if (p > 0.58 && p <= 0.72) {
+    // Smooth crossfade from image 2 to image 3
+    const t = easeInOutQuad((p - 0.58) / 0.14);
+    opImg1 = 0;
+    opImg2 = 1 - t;
+    opImg3 = t;
+  } else {
+    opImg1 = 0;
+    opImg2 = 0;
+    opImg3 = 1;
+  }
+
+  if (img1) {
+    img1.style.opacity = opImg1;
+    img1.style.transform = `scale(${1.0 + 0.04 * ramp(p, 0, 0.35)})`;
+  }
+  if (img2) {
+    img2.style.opacity = opImg2;
+    img2.style.transform = `scale(${1.04 - 0.03 * ramp(p, 0.2, 0.65)})`;
+  }
+  if (img3) {
+    img3.style.opacity = opImg3;
+    img3.style.transform = `scale(${1.0 + 0.03 * ramp(p, 0.6, 1.0)})`;
+  }
+
+  // ========================================================
+  // SCENE STAGE VISIBILITY & POINTER-EVENTS MANAGEMENT
+  // (Inactive stages are display:none so they NEVER block clicks!)
+  // ========================================================
+  
+  // Stage 1 (Hero): 0.00 to 0.18
+  if (stage1) {
+    const fadeOut1 = 1 - ramp(p, 0.02, 0.18);
+    if (fadeOut1 > 0.04) {
+      stage1.style.display = window.innerWidth <= 860 ? 'flex' : 'block';
+      stage1.style.opacity = fadeOut1;
+      stage1.style.transform = window.innerWidth <= 860 ? 'none' : `translateY(${-ramp(p, 0.02, 0.18) * 50}px)`;
+      stage1.style.pointerEvents = 'auto';
+      stage1.style.zIndex = '20';
+    } else {
+      stage1.style.display = 'none';
+      stage1.style.opacity = 0;
+      stage1.style.pointerEvents = 'none';
+      stage1.style.zIndex = '1';
+    }
+  }
+
+  // Stage 2 (Services): 0.18 to 0.40
+  if (stage2) {
+    let op2 = 0;
+    if (p >= 0.16 && p <= 0.26) {
+      op2 = easeOutCubic(ramp(p, 0.16, 0.26));
+    } else if (p > 0.26 && p <= 0.35) {
+      op2 = 1;
+    } else if (p > 0.35 && p <= 0.42) {
+      op2 = 1 - ramp(p, 0.35, 0.42);
+    }
+
+    if (op2 > 0.04) {
+      stage2.style.display = 'flex';
+      stage2.style.opacity = op2;
+      stage2.style.pointerEvents = 'auto';
+      stage2.style.zIndex = '22';
+    } else {
+      stage2.style.display = 'none';
+      stage2.style.opacity = 0;
+      stage2.style.pointerEvents = 'none';
+      stage2.style.zIndex = '1';
+    }
+  }
+
+  // Stage 3 (About Us & 62 Years): 0.40 to 0.62
+  if (stage3) {
+    let op3 = 0;
+    if (p >= 0.38 && p <= 0.46) {
+      op3 = easeOutCubic(ramp(p, 0.38, 0.46));
+    } else if (p > 0.46 && p <= 0.56) {
+      op3 = 1;
+    } else if (p > 0.56 && p <= 0.64) {
+      op3 = 1 - ramp(p, 0.56, 0.64);
+    }
+
+    if (op3 > 0.04) {
+      stage3.style.display = 'flex';
+      stage3.style.opacity = op3;
+      stage3.style.pointerEvents = 'auto';
+      stage3.style.zIndex = '24';
+    } else {
+      stage3.style.display = 'none';
+      stage3.style.opacity = 0;
+      stage3.style.pointerEvents = 'none';
+      stage3.style.zIndex = '1';
+    }
+  }
+
+  // Stage 4 (Leadership & Board): 0.62 to 0.82 (Top priority click handling!)
+  if (stage4) {
+    let op4 = 0;
+    if (p >= 0.60 && p <= 0.68) {
+      op4 = easeOutCubic(ramp(p, 0.60, 0.68));
+    } else if (p > 0.68 && p <= 0.78) {
+      op4 = 1;
+    } else if (p > 0.78 && p <= 0.84) {
+      op4 = 1 - ramp(p, 0.78, 0.84);
+    }
+
+    if (op4 > 0.04) {
+      stage4.style.display = 'flex';
+      stage4.style.opacity = op4;
+      stage4.style.pointerEvents = 'auto';
+      stage4.style.zIndex = '30'; // High z-index to guarantee buttons receive mouse clicks!
+    } else {
+      stage4.style.display = 'none';
+      stage4.style.opacity = 0;
+      stage4.style.pointerEvents = 'none';
+      stage4.style.zIndex = '1';
+    }
+  }
+
+  // Stage 5 (Upper Midwest Atlas & Contact Call): 0.82 to 1.00
+  if (stage5) {
+    const op5 = easeOutCubic(ramp(p, 0.80, 0.90));
+    if (op5 > 0.04) {
+      stage5.style.display = window.innerWidth <= 860 ? 'flex' : 'block';
+      stage5.style.opacity = op5;
+      stage5.style.pointerEvents = 'auto';
+      stage5.style.zIndex = '28';
+    } else {
+      stage5.style.display = 'none';
+      stage5.style.opacity = 0;
+      stage5.style.pointerEvents = 'none';
+      stage5.style.zIndex = '1';
+    }
+  }
+
+  // ========================================================
+  // ACTIVE NAVBAR LIGHTING SYNC
+  // ========================================================
+  updateActiveNavLink(p);
+}
+
+function updateActiveNavLink(p) {
+  const nServices = document.getElementById('nav-services');
+  const nAbout = document.getElementById('nav-about');
+  const nLeadership = document.getElementById('nav-leadership');
+  const nAtlas = document.getElementById('nav-atlas');
+
+  [nServices, nAbout, nLeadership, nAtlas].forEach(el => el && el.classList.remove('active'));
+
+  if (p >= 0.18 && p < 0.38 && nServices) {
+    nServices.classList.add('active');
+  } else if (p >= 0.38 && p < 0.60 && nAbout) {
+    nAbout.classList.add('active');
+  } else if (p >= 0.60 && p < 0.80 && nLeadership) {
+    nLeadership.classList.add('active');
+  } else if (p >= 0.80 && nAtlas) {
+    nAtlas.classList.add('active');
+  }
+}
+
+function scrollToProgress(target) {
+  const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  window.scrollTo({
+    top: target * maxScroll,
+    behavior: 'smooth'
+  });
+}
+
+/* People Tabs Click Logic (Fixed and Tested!) */
+function switchPeopleTab(tab) {
+  const staffGrid = document.getElementById('staff-grid');
+  const boardGrid = document.getElementById('board-grid');
+  const tabStaff = document.getElementById('tab-staff');
+  const tabBoard = document.getElementById('tab-board');
+
+  if (!staffGrid || !boardGrid) return;
+
+  if (tab === 'staff') {
+    staffGrid.style.display = 'grid';
+    boardGrid.style.display = 'none';
+    if (tabStaff) tabStaff.classList.add('active');
+    if (tabBoard) tabBoard.classList.remove('active');
+  } else {
+    staffGrid.style.display = 'none';
+    boardGrid.style.display = 'grid';
+    if (tabBoard) tabBoard.classList.add('active');
+    if (tabStaff) tabStaff.classList.remove('active');
+  }
+}
+
+/* Field Notes Modal Logic */
+function openFieldNotes(index) {
+  currentNoteIndex = index % fieldNotesData.length;
+  renderFieldNote();
+  const modal = document.getElementById('field-notes-modal');
+  if (modal) {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeFieldNotes() {
+  const modal = document.getElementById('field-notes-modal');
+  if (modal) {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+function renderFieldNote() {
+  const item = fieldNotesData[currentNoteIndex];
+  if (!item) return;
+  document.getElementById('note-kind').textContent = item.kind;
+  document.getElementById('note-name').textContent = item.name;
+  document.getElementById('note-deck').textContent = item.deck;
+  document.getElementById('note-history').textContent = item.history;
+  document.getElementById('note-detail').textContent = item.detail;
+  document.getElementById('note-question').textContent = item.question;
+  document.getElementById('note-counter').textContent = `0${currentNoteIndex + 1} / 04`;
+}
+
+function nextNote() {
+  currentNoteIndex = (currentNoteIndex + 1) % fieldNotesData.length;
+  renderFieldNote();
+}
+
+function prevNote() {
+  currentNoteIndex = (currentNoteIndex - 1 + fieldNotesData.length) % fieldNotesData.length;
+  renderFieldNote();
+}
+
+/* Contact Modal Logic */
+function openContactModal() {
+  const modal = document.getElementById('contact-modal');
+  if (modal) {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeContactModal() {
+  const modal = document.getElementById('contact-modal');
+  if (modal) {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+function handleContactSubmit(e) {
+  e.preventDefault();
+  const msg = document.getElementById('contact-success-msg');
+  if (msg) msg.style.display = 'block';
+  setTimeout(() => {
+    closeContactModal();
+    if (msg) msg.style.display = 'none';
+  }, 3500);
+}
+
+/* About Modal Logic */
+function openAboutModal() {
+  const modal = document.getElementById('about-modal');
+  if (modal) {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeAboutModal() {
+  const modal = document.getElementById('about-modal');
+  if (modal) {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+/* Mobile Menu Logic */
+const btnMobileMenu = document.getElementById('btn-mobile-menu');
+const mobileMenu = document.getElementById('mobile-menu');
+
+if (btnMobileMenu) {
+  btnMobileMenu.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.contains('open');
+    if (isOpen) {
+      closeMobileMenu();
+    } else {
+      mobileMenu.classList.add('open');
+      btnMobileMenu.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+  });
+}
+
+function closeMobileMenu() {
+  if (mobileMenu) {
+    mobileMenu.classList.remove('open');
+    if (btnMobileMenu) btnMobileMenu.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+}
+
+/* Backdrop click & Keyboard handling */
+function onBackdropClick(e, modalId) {
+  if (e.target.id === modalId) {
+    if (modalId === 'field-notes-modal') closeFieldNotes();
+  }
+}
+
+function onModalBackdropClick(e, modalId) {
+  if (e.target.id === modalId) {
+    if (modalId === 'contact-modal') closeContactModal();
+    if (modalId === 'about-modal') closeAboutModal();
+  }
+}
+
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeFieldNotes();
+    closeContactModal();
+    closeAboutModal();
+    closeMobileMenu();
+  } else if (e.key === 'ArrowRight') {
+    const fnModal = document.getElementById('field-notes-modal');
+    if (fnModal && fnModal.classList.contains('open')) nextNote();
+  } else if (e.key === 'ArrowLeft') {
+    const fnModal = document.getElementById('field-notes-modal');
+    if (fnModal && fnModal.classList.contains('open')) prevNote();
+  }
+});
+</script>
+</body>
+</html>
